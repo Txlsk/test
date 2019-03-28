@@ -12,16 +12,47 @@
 （2）利用检测模型，对分类好的测试集进行5种违禁物品的检测。将最后的结果保存为json文件。
 
 ## 二、环境配置
-CUDA:cuda_9.0
-CUDNN:cudnn7.3.0
-Anadconda:Anaconda3-5.2
+### (1) cuda配置
+CUDA:cuda_9.0   https://developer.download.nvidia.cn/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run?TkVhiQlizfcKV9yBquQCmqKp9JY5Fg7xnBQN9QPgwQxNL05zDPoc-B04mXtK_4Id5vEo4qSNuTsFikfvTzvHUjmZHKIDJdWqdRLbHGNkpsG1tME-sxKpK1RowPsvX7TxOTchvo2rH5R1l1wBqyR4CoE3Jc7u9YpUgxjsERQWFiTbZF3gpsWAJELM
 
-创建conda虚拟环境
-### （1）tensorflow环境配置
+sudo sh cuda_9.0.176_384.81_linux.run   
 
-### (2) mmdetection环境配置
+添加环境变量：
+		在终端中输入：
+			gedit ~/.bashrc 
+		然后打开的文件最后面写入：
+			export PATH="$PATH:/usr/local/cuda-9.0/bin"
+			export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64"
+		保存并关闭文件， 在终端中输入：
+			source ~/.bashrc
+
+CUDNN:cudnn7.3.0   https://developer.nvidia.com/rdp/cudnn-archive
+
+tar xvzf cudnn-9.0-×.tgz
+
+  sudo cp cuda/include/cudnn.h /usr/local/cuda-9.0/include
+	sudo cp cuda/lib64/libcudnn* /usr/local/cuda-9.0/lib64
+	sudo chmod a+r /usr/local/cuda-9.0/include/cudnn.h /usr/local/cuda-9.0/lib64/libcudnn*
+
+
+Anadconda:Anaconda3-5.2  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+安装：bash Anaconda×Linux-x86_64.sh
+激活：conda：
+		gedit ~/.bashrc
+		export PATH="$PATH:~/anaconda3/bin"
+		source ~/.bashrc 
+
+### （2）创建conda虚拟环境
+#### （1）tensorflow环境配置
+1、新建tf环境 
+conda create -n tf python=3.6 && source activate tf
+
+2、安装tensorflow
+conda install tensorflow-gpu=1.12.0
+
+#### (2) mmdetection环境配置
 1、新建conda环境 
-conda create -n mm python=3.6 && source activate py36
+conda create -n mm python=3.6 && source activate mm
 
 2、安装pytorch  
 conda install pytorch torchvision -c pytorch
